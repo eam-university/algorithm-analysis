@@ -21,32 +21,32 @@ public class ExactAge {
 
     /**
      * Método encargado de calcular la edad en años, meses y días dado el años, mes y día de nacimiento de una persona
-     * @param birthDay Día de nacimiento
-     * @param birthMonth Mes de nacimiento
-     * @param birthYear Año de nacimiento
+     * @param day Día de nacimiento
+     * @param month Mes de nacimiento
+     * @param year Año de nacimiento
      * @return Arreglo en formato [años, meses, dias]
      */
-    public static int[] calculateAge(int birthYear, int birthMonth, int birthDay) {
+    public static int[] calculateAge(int year, int month, int day) {
         // Obtener la fecha actual
         LocalDate now = LocalDate.now();
 
         // Obtener la fecha de nacimiento como un objeto LocalDate
-        LocalDate birthDate = LocalDate.of(birthYear, birthMonth, birthDay);
+        LocalDate birthDate = LocalDate.of(year, month, day);
 
         // Calcular la edad obteniendo las diferencias en cada dato
-        int years = now.getYear() - birthDate.getYear();
+        int userYears = now.getYear() - birthDate.getYear();
         int months = now.getMonthValue() - birthDate.getMonthValue();
         int days = now.getDayOfMonth() - birthDate.getDayOfMonth();
 
         // Ajustar la edad si aún no se ha cumplido años
         if (months < 0 || (months == 0 && days < 0)) {
-            years--;
+            userYears--;
             months = (months + 12) % 12;
             days = (days + birthDate.lengthOfMonth()) % birthDate.lengthOfMonth();
         }
 
         // Devolver la edad en años, meses y días
-        return new int[] { years, months, days };
+        return new int[] { userYears, months, days };
     }
     
     /**
