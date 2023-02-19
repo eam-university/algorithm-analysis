@@ -1,6 +1,7 @@
 package algorithmAnalysis;
 
 import java.time.LocalDate;
+import java.util.Scanner;
 
 /**
  * Algorithm to get the almost exact age given a date in format dd-mm-yyyy
@@ -9,11 +10,10 @@ import java.time.LocalDate;
 public class ExactAge {
 
     public static void main(String[] args) {
-        int birthDay = 10;
-        int birthMonth = 6;
-        int birthYear = 1985;
-        
-        int[] age = calculateAge(birthDay, birthMonth, birthYear);
+    	
+    	int[] userInput = getUserInput();
+    
+        int[] age = calculateAge(userInput[0], userInput[1], userInput[2]);
         
         // Imprimir la edad en años meses y días
         System.out.printf("La edad es: %d años, %d meses y %d días\n", age[0], age[1], age[2]);
@@ -26,7 +26,7 @@ public class ExactAge {
      * @param birthYear Año de nacimiento
      * @return Arreglo en formato [años, meses, dias]
      */
-    public static int[] calculateAge(int birthDay, int birthMonth, int birthYear) {
+    public static int[] calculateAge(int birthYear, int birthMonth, int birthDay) {
         // Obtener la fecha actual
         LocalDate now = LocalDate.now();
 
@@ -47,5 +47,25 @@ public class ExactAge {
 
         // Devolver la edad en años, meses y días
         return new int[] { years, months, days };
+    }
+    
+    /**
+     * Método encargado de solicitar la fecha de nacimiento de una persona en años, meses y días.
+     * @return Arreglo en formato [año, mes, dia]
+     */
+    public static int[] getUserInput() {
+        int day, month, year;
+        // User input for the year, month and day
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Ingrese su año de nacimiento (yyyy): ");
+        year = scanner.nextInt();
+        System.out.print("Ingrese su mes de nacimiento en número (mm): ");
+        month = scanner.nextInt();
+        System.out.print("Ingrese su día de nacimiento (dd): ");
+        day = scanner.nextInt();
+        scanner.close();
+        
+        // Se devuelve la información que el usuario ha ingresado
+    	return new int[] {year, month, day};
     }
 }
